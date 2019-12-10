@@ -7,20 +7,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>basep</title>
     <script src="./libs/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+  
+
     <script src="./libs/bootstrap.min.js"></script>
     <script src="./libs/canvasjs.js"></script>
     <script src="./libs/main.js"></script>
-    <script src="./libs/live.js"></script>
-    <link rel="stylesheet" href="/baseP/css/bootstrap.css">
+    <!-- <script src="./libs/live.js"></script> -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
     <!-- <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet"> -->
-
+   
 </head>
 
 <body class="container">
-    <div id="chartContainer" style="height: 350px; width: 840px; margin-top: 1%; "></div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+  
+    <!-- <div id="chartContainer" style="height: 350px; width: 840px; margin-top: 1%; "></div> -->
     <div id="stage" class="row">
 
     </div>
+
+
+    <script src="./libs/myData.js"></script>
 </body>
 
 </html>
