@@ -21,13 +21,13 @@ const api = {
                     alert("error")
                     // alert(xhr.status);
                     // alert(thrownError);
-                }
+                },
             })
         })
     }
 }
 
-
+// [{},{}]
 api.retreiveCurrencies().
 then(res => {
     saveTheCurrencies(res.slice(0, 8))
@@ -36,22 +36,23 @@ then(res => {
 function saveTheCurrencies(result) {
     tempArr.push(result)
     console.log(result)
-    console.log(tempArr)
     // draw(result)
 }
 
-// function getCoin(result) {
-//     console.log(result)
-//     console.log(tempArr)
-// }
+api.retreiveCurrencies().
+then(res => {
+    searchTheCurrencies(res.slice(0, 8))
+})
 
-// getCoin()
-  // search in coins
+function searchTheCurrencies(result) {
+    showCoins(result/ + /?symbol/usd)
+  
+    // draw(result)
+}
 
-  function searchCoin(){
-    getCoins() 
-  }
-
+function showCoins(filter){
+    getAjaxData("https://restcountries.eu/rest/v2/" + filter, finalData => displayCountries(finalData));
+}
 
 
 }); //RF
