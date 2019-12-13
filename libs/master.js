@@ -1,6 +1,7 @@
 // https://www.coingecko.com/api/documentations/v3#/coins/get_coins__id_
 // https://api.coingecko.com/api/v3/simple/price?ids=particl&vs_currencies=usd,eur
 // https: //api.coingecko.com/api/v3/simple/symbol?ids=
+let baseArr = []
 
 $(() => {
 
@@ -45,15 +46,18 @@ $(() => {
         displayCoins(res.slice(0, 9))
     })
 
-
+    //? PAGES NAV
 
     $("#homeBut").click(() => {
+
         spinnerSvg();
+        $("#stage").html(homeContent);
         displayCoins(baseArr)
     });
 
     $("#liveBut").click(() => {
-
+        lineChartData.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        lineChartData.datasets[0].data = [1, 2, 40, 500, 45]
         spinnerSvg();
         $("#stage").empty();
         $("#stage").html(`<canvas id="canvas"></canvas>`);
@@ -103,6 +107,7 @@ $(() => {
 
 
     $("#searchBut").click(() => {
+
         if (!$("#searcher").val()) {
             alert("please fill in the field")
             return
@@ -136,10 +141,6 @@ $(() => {
 
     function displayCoins(currency) {
 
-
-
-
-        // console.log(currency)
         let content = "";
 
         for (const item of currency) {
