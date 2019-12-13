@@ -1,33 +1,25 @@
 // https://www.coingecko.com/api/documentations/v3#/coins/get_coins__id_
 // https://api.coingecko.com/api/v3/simple/price?ids=particl&vs_currencies=usd,eur
 // https: //api.coingecko.com/api/v3/simple/symbol?ids=
-
 $(() => {
 
-    function spinnerSvg() {
-        $("#stage").empty();
-        $("#stage").html(`<img src="images/spinner.svg" alt="" id="spinnerId" />`)
-
-    }
-    spinnerSvg();
+    let tempArr = []
 
     const config = {
         currencies: "https://api.coingecko.com/api/v3/coins/list",
         currencyById: "https://api.coingecko.com/api/v3/coins/",
         comparePrice: "https://min-api.cryptocompare.com/data"
     }
+
+
     const api = {
         retreiveCurrencies: function () {
             return new Promise((resolve) => {
                 $.ajax({
-                    url: config.currencyById,
+                    url: config.currencies,
                     method: "GET",
                     success: function (currencies) {
-                        resolve(currencies);
-                        for (const obj of currencies) {
-                            baseArr.push(obj)
-                        }
-
+                        resolve(currencies)
                     },
                     error: function () {
                         alert("error")
@@ -40,21 +32,16 @@ $(() => {
     }
 
 
-    api.retreiveCurrencies().
-    then(res => {
-        displayCoins(res.slice(0, 9))
-    })
-
-
-
     $("#homeBut").click(() => {
-        spinnerSvg();
-        displayCoins(baseArr)
+        $("#stage").empty();
+        api.retreiveCurrencies().
+        then(res => {
+            displayCoins(res.slice(0, 8))
+        })
+
     });
 
     $("#liveBut").click(() => {
-
-        spinnerSvg();
         $("#stage").empty();
         $("#stage").html(`<canvas id="canvas"></canvas>`);
 
@@ -93,39 +80,26 @@ $(() => {
         });
     });
 
-
-    $("#aboutBut").click(() => {
-        spinnerSvg();
-        $("#stage").empty();
-        $("#stage").html(about);
-    });
-
-
-
     $("#searchBut").click(() => {
         if (!$("#searcher").val()) {
             alert("please fill in the field")
             return
         } else {
-            findCoin(baseArr)
-            //* a demo on how the search works externally (not needed but interesting)
-            // getAjaxData(config.currencyById + $("#searcher").val().toLowerCase(), finalData => findCoin(finalData));
+            // console.log((config.currenciesCoin + "?symbol/" + $("#searcher").val()))
+            // showCoins("?symbol/" + $("#searcher").val())
+            // let searchValue = $("#searcher").val()
+            getAjaxData(config.currencyById + $("#searcher").val().toLowerCase(), finalData => findCoin(finalData));
+
+            // displayCoins(coins)
         }
     });
 
     function findCoin(coin) {
+        console.log(coin)
+        const name = `${coin.name} `
+        $("#stage").empty();
+        $("#stage").append(name);
 
-        const searchItem = $("#searcher").val().toLowerCase()
-        console.log(searchItem)
-        for (const item of coin) {
-            if (item.name === searchItem) {
-                console.log(coin.item.name)
-                console.log(coin.name)
-            }
-            const name = `${coin.name} `
-            $("#stage").empty();
-            $("#stage").append(name);
-        }
     }
 
 
@@ -135,22 +109,18 @@ $(() => {
 
 
     function displayCoins(currency) {
-
-
-
-
         // console.log(currency)
         let content = "";
 
         for (const item of currency) {
-            // tempArr.push(item)
+            tempArr.push(item)
             const card = `
 
                     <div class="card border-dark bg-light col-3"  id="${item.id}">
           <div class="card-header text-info">${item.name}</div>
           <div class="card-body text-dark">
             <h5 class="card-title">${item.symbol}</h5>
-            <img src="${item.image.small}" alt="${item.name}" />
+
             <p>
             <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapse+${item.id}" role="button"
                 aria-expanded="false" aria-controls="multiCollapse+${item.id}">More Info</a>
@@ -171,12 +141,13 @@ $(() => {
                     `
             content += card;
         }
-        $("#stage").empty();
-
         $("#stage").append(content)
-
     }
 
+    api.retreiveCurrencies().
+    then(res => {
+        displayCoins(res.slice(0, 8))
+    })
 
 
 
