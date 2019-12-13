@@ -2,23 +2,102 @@
 // https://api.coingecko.com/api/v3/simple/price?ids=particl&vs_currencies=usd,eur
 // https: //api.coingecko.com/api/v3/simple/symbol?ids=
 $(() => {
+
+    let tempArr = []
+
     const config = {
         currencies: "https://api.coingecko.com/api/v3/coins/list",
         currencyById: "https://api.coingecko.com/api/v3/coins/",
         comparePrice: "https://min-api.cryptocompare.com/data"
     }
 
-    function getAjaxData(url, callback) {
-        $.ajax({
-            method: "GET",
-            url: url,
-            error: err => alert("something went wrong, please try again ", err.message),
-            success: coins => callback(coins)
-        });
+    // function getCoins(url, callback) {
+    //     $.ajax({
+    //         method: "GET",
+    //         url: url,
+    //         error: err => alert("something went wrong, please try again ", err.message),
+    //         success: coins => callback(coins.slice(0, 12))
+    //     });
+    // }
+
+    // function getCoins(url, callback) {
+    //     $.ajax({
+    //         method: "GET",
+    //         url: url,
+    //         error: err => alert(err.message),
+    //         // success: currency => displayCoins(currency.slice(0, 12))
+    //         success: coins => callback(coins.slice(0, 12))
+    //     });
+    // }
+
+
+    const api = {
+        retreiveCurrencies: function () {
+            return new Promise((resolve) => {
+                $.ajax({
+                    url: config.currencies,
+                    method: "GET",
+                    success: function (currencies) {
+                        resolve(currencies)
+                    },
+                    error: function () {
+                        alert("error")
+                        // alert(xhr.status);
+                        // alert(thrownError);
+                    },
+                })
+            })
+        }
     }
 
-    // first we need to get the id
 
+    $("#homeBut").click(() => {
+        $("#stage").empty();
+        api.retreiveCurrencies().
+        then(res => {
+            displayCoins(res.slice(0, 8))
+        })
+
+    });
+
+    $("#liveBut").click(() => {
+        $("#stage").empty();
+        $("#stage").html(`<canvas id="canvas"></canvas>`);
+
+        // $("#canvas").show();
+
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myLine = Chart.Line(ctx, {
+            data: lineChartData,
+            options: {
+                responsive: true,
+                hoverMode: 'index',
+                stacked: false,
+                title: {
+                    display: true,
+                    text: 'Coin chart coin tracker'
+                },
+                scales: {
+                    yAxes: [{
+                        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: 'left',
+                        id: 'y-axis-1',
+                    }, {
+                        type: 'linear', // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: 'right',
+                        id: 'y-axis-2',
+
+                        // grid line settings
+                        gridLines: {
+                            drawOnChartArea: false, // only want the grid lines for one axis to show up
+                        },
+                    }],
+                }
+            }
+        });
+    });
 
     $("#searchBut").click(() => {
         if (!$("#searcher").val()) {
@@ -27,32 +106,12 @@ $(() => {
         } else {
             // console.log((config.currenciesCoin + "?symbol/" + $("#searcher").val()))
             // showCoins("?symbol/" + $("#searcher").val())
-            getAjaxData(config.currencyById + $("#searcher").val(), finalData => findCoin(finalData));
+            // let searchValue = $("#searcher").val()
+            getAjaxData(config.currencyById + $("#searcher").val().toLowerCase(), finalData => findCoin(finalData));
 
             // displayCoins(coins)
         }
     });
-    homeCoins()
-
-
-
-    function homeCoins() {
-        getAjaxData(config.currencies, finalData => displayCoins(finalData.slice(0, 9)));
-
-    }
-
-    function displayCoins(coins) {
-        console.log(coins)
-        $("#stage").empty();
-        let content = "";
-        for (const item of coins) {
-            const theCoin = `
-        ${item.name}             
-            `;
-            content += theCoin;
-        }
-        $("#stage").append(content);
-    }
 
     function findCoin(coin) {
         console.log(coin)
@@ -61,5 +120,54 @@ $(() => {
         $("#stage").append(name);
 
     }
+
+
+    // homepage getCoinsinCards
+    //  labels:[tempArr[0].name,tempArr[1].name],
+
+
+
+    function displayCoins(currency) {
+        // console.log(currency)
+        let content = "";
+
+        for (const item of currency) {
+            tempArr.push(item)
+            const card = `
+
+                    <div class="card border-dark bg-light col-3"  id="${item.id}">
+          <div class="card-header text-info">${item.name}</div>
+          <div class="card-body text-dark">
+            <h5 class="card-title">${item.symbol}</h5>
+
+            <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapse+${item.id}" role="button"
+                aria-expanded="false" aria-controls="multiCollapse+${item.id}">More Info</a>
+
+        </p>
+
+        <div class="collapse multi-collapse" id="multiCollapse+${item.id}">
+          <p class="card-text"><small class="text-muted">Last updated : <br/>${item.last_updated}</small>
+
+            </p>
+             <p class="card-text">price :$</p> 
+
+          </div>
+        </div>
+
+        </div>
+
+                    `
+            content += card;
+        }
+        $("#stage").append(content)
+    }
+
+    api.retreiveCurrencies().
+    then(res => {
+        displayCoins(res.slice(0, 8))
+    })
+
+
 
 }); //RF

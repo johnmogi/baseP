@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>the Logic side of the coin project</title>
     <script src="./libs/src/jquery-3.4.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
-  
 
     <script src="./libs/src/bootstrap.min.js"></script>
     <script src="./libs/src/canvasjs.js"></script>
+ 
 
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
-   
-</head>
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
+    />
 
-<body class="container">
-    <div id="searchForm">
-            <input id="searcher" type="text" />
-<button id="searchBut">Search</button>
-    </div>
-        <canvas id="myChart" width="400" height="400"></canvas>
+    <script src="https://www.chartjs.org/dist/2.9.3/Chart.min.js"></script>
+
+    <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
+<link rel="stylesheet" href="css/custom.css">
+    
+  </head>
+
+  <body class="container text-white bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="#" id="homeBut">All.Coins</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                  <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" id="liveBut">Live Reports</a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link" href="#" id="aboutBut">Credit</a>
+                          </li>
+                  </ul>
+                  <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searcher">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="searchBut">Search</button>
+                  </form> 
+                </div>
+              </nav>
+
   
-    <!-- <div id="chartContainer" style="height: 350px; width: 840px; margin-top: 1%; "></div> -->
+	</div>
+	
+
     <div id="stage" class="row">
-
+         
     </div>
-
-
+ <!-- <script src="./libs/drawChart.js"></script> -->
     <script src="./libs/master2.js"></script>
     <script src="./libs/master.js"></script>
+  
+   
 
-</body>
 
+  </body>
 </html>
