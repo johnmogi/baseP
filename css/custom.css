@@ -3,3 +3,9 @@ canvas {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+#spinnerId {
+    widows: 100%;
+    height: 500px;
+    margin: 0 auto;
+}
