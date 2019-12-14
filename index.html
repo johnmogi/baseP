@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>the Logic side of the coin project</title>
+  <title>All.Coin Project by John mogi</title>
   <script src="./libs/src/jquery-3.4.1.js"></script>
 
   <script src="./libs/src/bootstrap.min.js"></script>
@@ -19,40 +19,49 @@
 
   <script src="https://www.chartjs.org/samples/latest/utils.js"></script>
   <link rel="stylesheet" href="css/custom.css">
-
+  <link href="./images/favicon-af251bb2.webp" rel="icon" type="image/png" />
 </head>
 
-<body class="container text-white bg-dark">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" id="homeBut">All.Coins</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-      aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<body class="container-fluid text-white bg-dark">
+  <div id="navbar-wrapper" class="bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark container">
+      <a class="navbar-brand" href="#" id="homeBut">All.Coins</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <div class="collapse navbar-collapse bg-dark border-info container-fluid" id="mainNav">
-      <ul class="navbar-nav mr-auto mt-2 mt-lg-0 container">
+      <div class="collapse navbar-collapse bg-dark border-info container-fluid" id="mainNav">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 container">
 
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="liveBut">Live Reports</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="aboutBut">Credit</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searcher">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="searchBut">Search</button>
-      </form>
-    </div>
-  </nav>
-
-
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="liveBut">Live Reports</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" id="aboutBut">Credit</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" id="searcher">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="searchBut">Search</button>
+        </form>
+      </div>
+    </nav>
   </div>
 
+  </div>
+  <div id="content-wrapper" class="container-fluid">
+    <div id="homeStage"> </div>
+    <div id="stage" class="row container">
+      <img src="images/spinner.svg" alt="" id="spinnerId" />
+    </div>
+  </div>
 
-  <div id="stage" class="row">
-    <img src="images/spinner.svg" alt="" id="spinnerId" />
+  <div class="footer bg-dark py-3 text-white mx-auto">
+    <div id="footer-wrapper" class="bg-dark-600">
+
+      All.Coins by <a href="johnmogi.com">John Mogi</a>
+    </div>
   </div>
 
   <!-- <script src="./libs/utilities.js"></script> -->

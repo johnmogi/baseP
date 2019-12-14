@@ -52,6 +52,8 @@ $(() => {
     then(res => {
         displayCoins(res.slice(0, 8))
     })
+    $("#homeStage").html(homeContent);
+
 
     //? PAGES NAV
 
@@ -131,8 +133,8 @@ $(() => {
         const searchItem = $("#searcher").val().toLowerCase()
         console.log(searchItem)
         for (const item of coin) {
-            if (item.name === searchItem) {
-                console.log(coin.item.name)
+            if (item.symbol === searchItem) {
+                console.log(coin.item.symbol)
                 console.log(coin.name)
             }
             const name = `${coin.name} `

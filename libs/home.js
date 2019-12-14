@@ -1,12 +1,16 @@
 const homeContent = `
+
+
 <main role="main" class="container-fluid inner cover">
-        <div class="backgroundCoin">
+        <div class="backgroundCoin container-fluid ">
             <div class="container hero jumbotron">
                 <p class="lead">
-                    </p><div class="row">
-                        <div class="col-3">
+                    </p>
+                    
+                    <div class="row">
+                        <div class="col-3"></div>
                         <div class="col-9">
-                            <h1 class="cover-heading">the Crypto project</h1>
+                            <h1 class="cover-heading">the All.coins project</h1>
 
                             Hi, Dear user, in the following page you will find a list of all coins, you can select
                             up to
@@ -27,4 +31,5 @@ const homeContent = `
 `
 
 {
-    /* <img src="../images/logoCuadradoLimpioMas20.jpeg" width="280px"></div> */ }
+    /* <img src="../images/logoCuadradoLimpioMas20.jpeg" width="280px"></div> */
+}

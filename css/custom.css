@@ -4,10 +4,17 @@ canvas {
     -ms-user-select: none;
 }
 
-#spinnerId {
-    widows: 100%;
-    height: 500px;
+#spinnerId,
+#stage {
+    width: 100%;
+    min-height: 500px;
     margin: 0 auto;
+}
+
+.container-fluid {
+    box-sizing: border-box;
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .card {
@@ -17,6 +24,7 @@ canvas {
 
 ul.navbar-nav.mr-auto.mt-2.mt-lg-0.container {
     max-width: 310px;
+    margin: 0 2.5%;
 }
 
 img.card-img-top {
@@ -34,4 +42,37 @@ img.card-img-top {
 .custom-control-label {
 
     float: right;
+}
+
+#navbar-wrapper {
+    position: sticky;
+    top: 0;
+    z-index: 15;
+}
+
+.footer {
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+}
+
+/* content */
+.backgroundCoin {
+    background: url(../images/background-british-budget-business-41183.jpeg);
+}
+
+.hero.jumbotron {
+    background: transparent;
+}
+
+#content-wrapper {
+    background: url(../images/pexels-photo-241544.jpeg);
+}
+
+.backgroundCoin,
+#content-wrapper {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
