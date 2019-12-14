@@ -10,6 +10,28 @@ canvas {
     margin: 0 auto;
 }
 
+.card {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+ul.navbar-nav.mr-auto.mt-2.mt-lg-0.container {
+    max-width: 310px;
+}
+
+img.card-img-top {
+    max-width: 180px;
+}
+
 .entry-content {
     background: url(../images/me.svg);
+}
+
+.custom-control {
+    display: contents;
+}
+
+.custom-control-label {
+
+    float: right;
 }

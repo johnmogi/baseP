@@ -4,11 +4,10 @@
 
 // api key : 4e018ed9e79f55f4a8ce1334f5bef0edcf27642fd1d7744698b7605e4ccade42
 
-// https: //min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD
+https: //min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD
 
 
-
-let baseArr = []
+    let baseArr = []
 
 $(() => {
 
@@ -50,7 +49,7 @@ $(() => {
 
     api.retreiveCurrencies().
     then(res => {
-        displayCoins(res.slice(0, 8))
+        displayCoins(res.slice(0, 9))
     })
 
     //? PAGES NAV
@@ -58,14 +57,18 @@ $(() => {
     $("#homeBut").click(() => {
 
         spinnerSvg();
-        $("#stage").html(homeContent);
+        // $("#stage").html(homeContent);
         displayCoins(baseArr)
     });
+
+    //? compare setup:
+    //  https://min-api.cryptocompare.com/data/price?fsym=BTC&tsyms=USD
+    // getAjaxData(config.currencyById + $("#searcher").val().toLowerCase(), finalData => findCoin(finalData));
+
 
     $("#liveBut").click(() => {
         lineChartData.labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
         lineChartData.datasets[0].data = [1, 2, 40, 500, 45]
-        lineChartData.datasets[1].data = [2, 40, 500, 45, 1]
         spinnerSvg();
         $("#stage").empty();
         $("#stage").html(`<canvas id="canvas"></canvas>`);
@@ -121,10 +124,9 @@ $(() => {
             return
         } else {
             findCoin(baseArr)
-            //* a demo on how the search works externally (not needed but interesting)
-            // getAjaxData(config.currencyById + $("#searcher").val().toLowerCase(), finalData => findCoin(finalData));
         }
     });
+
 
     function findCoin(coin) {
 
@@ -154,32 +156,25 @@ $(() => {
         for (const item of currency) {
             // tempArr.push(item)
             const card = `
+        <div class="card border-dark bg-light col-3"  id="${item.id}">
+          <div class="card-header text-info">${item.name}</div>
+          <img class="card-img-top" src="${currency.image.large}" alt="${item.name}" />
 
-                    <div class="card border-dark bg-light col-3"  id="${item.id}">
-          <div class="card-header text-info">${item.name}
-          <div class="custom-control custom-switch">
-          <input type="checkbox" class="custom-control-input input-cards-id" id="L+${item.id}" value="L+${item.id}">
-          <label class="custom-control-label" for="L+${item.id}"></label>
-      </div>
-          </div>
           <div class="card-body text-dark">
             <h5 class="card-title">${item.symbol}</h5>
-           
-            <img class="card-img-top" src="${item.image.large}" alt="${item.name}" />
             <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapse+${item.id}" role="button"
+                aria-expanded="false" aria-controls="multiCollapse+${item.id}">More Info</a>
 
-            <a class="btn btn-primary" data-toggle="collapse" href="#C${item.id}" role="button" aria-expanded="false" aria-controls="multiCollapse+${item.id}">More Info</a>
+        </p>
 
-            <div class="collapse multi-collapse" id="C${item.id}">
-      <div class="card card-body">
-      <p class="card-text"><small class="text-muted">Last updated : <br/>${item.last_updated}</small>
+        <div class="collapse multi-collapse" id="multiCollapse+${item.id}">
+          <p class="card-text"><small class="text-muted">Last updated : <br/>${item.last_updated}</small>
 
-      </p>
-      <p class="card-text">price : ${item.market_data.current_price.usd}$</p> 
-      </div>
-    </div>
+            </p>
+             <p class="card-text">price :$</p> 
 
-
+          </div>
         </div>
 
         </div>
