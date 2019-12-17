@@ -1,9 +1,9 @@
+// Have created a background arr for better performance
 let coinsDOM = {
     baseArr :[]
 }
-
 $(() => {
-let getId = () => `id_${Math.floor(Math.random() * 9999) + 1 }`;
+$("#homeStage").html(homeContent);
 
 const config = {
     currencies: "https://api.coingecko.com/api/v3/coins/list",
@@ -23,27 +23,29 @@ function spinnerSvg() {
 }
 
 $("#searchBut").click(() => {
+    let searchVal = $("#searcher").val()  
     if (!$("#searcher").val()) {
         alert("please fill in the field")
         return
     } else {
-        // findCoin(coinsDOM.searchArr)
+        findCoin(coinsDOM.baseArr, searchVal)
         //* a demo on how the search works externally (not needed but interesting)
         // getAjaxData(api.currencyById + $("#searcher").val().toLowerCase(), finalData => findCoin(finalData));
     }
 });
 
-function findCoin(coin) {
+function findCoin(coin, searchVal) {
  
     // const searchItem = $("#searcher").val().toLowerCase()
-    console.log(coin)
+  
     for (const item of coin) {
-        if (item.symbol === coin) {
+      
+        if (item.symbol == searchVal) {
             console.log(item.symbol)
             console.log(item.name)
             // const name = `${item.name} `
             $("#stage").empty();
-           
+            displayCoins(currency)
           }
     
         // $("#stage").append(name);
@@ -93,9 +95,6 @@ $("#liveBut").click(() => {
     });
 });
 
-
-
-
 class Coin { 
     constructor(_id,name, symbol, image,current_price,selected){ 
         this._id= _id 
@@ -109,8 +108,6 @@ class Coin {
 
 }
 
-    $("#homeStage").html(homeContent);
-
     const api = {
         retreiveCurrencies: function () {
             return new Promise((resolve) => {
@@ -119,9 +116,7 @@ class Coin {
                     method: "GET",
                     success: function (currencies) {
                         resolve(currencies);
-                        for (const obj of currencies) {
-                            coinsDOM.baseArr.push(obj)
-                        }
+                     
 
                     },
                     error: function () {
@@ -167,7 +162,7 @@ class Coin {
 for (const i of currency) {
     
 
-            const card  = document.createElement("div")
+            const card = document.createElement("div")
             card.setAttribute("class", "card border-dark bg-light col-3")
             card.id=(`${i.id}`)
             
@@ -194,6 +189,16 @@ for (const i of currency) {
             switcherLabel.setAttribute("for", `L+${i.id}`)
             cardSwitch.append(switcherLabel)
            
+            const cardBody = document.createElement("div")
+            cardBody.setAttribute("class", "card-body text-dark")
+            card.append(cardBody)
+
+            const cardTitle = document.createElement("h5")
+            cardTitle.classList.add("card-title")
+            cardTitle.append(`${i.symbol}`)
+            cardBody.append(cardTitle)
+            
+
         // for (const i of currency) {
 
         //     let coin = new Coin(getId(),`${i.name}`,`${i.symbol}`,`${i.image.large}`,`${i.current_price} `, false)
@@ -205,11 +210,11 @@ for (const i of currency) {
     //     2  <div class="card-header text-info">${i.name}
     //     3  <div class="custom-control custom-switch">
     //      4 <input type="checkbox" class="custom-control-input input-cards-id" id="L+${i.id}" value="L+${i.id}" role="button" aria-pressed="false">
-    //       <label class="custom-control-label" for="L+${i.id}"></label>
+    //      5 <label class="custom-control-label" for="L+${i.id}"></label>
     //   </div>
     //       </div>
-    //       <div class="card-body text-dark">
-    //         <h5 class="card-title">${i.symbol}</h5>
+    //     6  <div class="card-body text-dark">
+    //      7   <h5 class="card-title">${i.symbol}</h5>
            
     //         <img class="card-img-top" src="${i.image.large}" alt="${i.name}" />
     //         <p>
@@ -240,6 +245,11 @@ for (const i of currency) {
     }
 
 
-
-
+// this call is a background store into home + search areas.
+    api.retreiveCoin().
+    then(res => {
+        for (const obj of res) {
+            coinsDOM.baseArr.push(obj)
+        }
+    })
 }); //RF
